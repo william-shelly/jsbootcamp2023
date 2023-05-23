@@ -69,7 +69,7 @@ function App() {
             <div>
               <NavBar categories={categories} showAddCategory={showAddCategory} />
               <div className="container flex">
-                <div className="w-1/2">
+                <div className="w-full">
                   <BillsTable bills={bills} showAddBill={showAddBill} />
                 </div>
                 {/* 
