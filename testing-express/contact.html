@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("form");
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          alert("form submitted");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <form action="/contact" method="POST" class="w-1/2 mx-auto mt-10 text-left">
+      <div>
+        <label for="name" class="block mb-3">Name</label>
+        <input
+          id="name"
+          class="w-full p-2 mb-3 border border-gray-400 border-solid"
+          name="name"
+          required
+        />
+      </div>
+      <div>
+        <label for="email" class="block mb-3">Email address</label>
+        <input
+          id="email"
+          class="w-full p-2 mb-3 border border-gray-400 border-solid"
+          type="email"
+          name="email"
+          required
+        />
+      </div>
+      <div>
+        <label for="notes" class="block mb-3">Notes</label>
+        <textarea
+          id="notes"
+          name="notes"
+          class="w-full p-3 border border-gray-400"
+          rows="3"
+          placeholder="Anything you want to tell us!"
+        ></textarea>
+      </div>
+      <div>
+        <button
+          type="submit"
+          class="p-3 pl-5 pr-5 mt-5 text-white bg-green-500 rounded-lg"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </body>
+</html>
