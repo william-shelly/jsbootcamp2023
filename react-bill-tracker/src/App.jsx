@@ -7,25 +7,38 @@ import NavBar from './components/NavBar'
 function App() {
 
   const [shouldShowAddCategory, setShouldShowAddCategory] = useState(false)
+  const [shouldShowAddBill, setShouldShowAddBill] = useState(false)
   const [categories, setCategories] = useState([])
-
-  // There is something wrong with this useEffect hook
-  // It is not working as expected
-  // STOPED AT Storing the data
+  const [bills, setBills] = useState([])
 
   useEffect(() => {
     const categoriesInLocalStorage = JSON.parse(
       localStorage.getItem(categories)
     )
 
-    if (categoriesInLocalStorage !== categories) {
-      setCategories(categoriesInLocalStorage)
-    }
+    const billsInLocalStorage = JSON.parse(
+      localStorage.getItem(bills)
+    )
+
+    setCategories(categoriesInLocalStorage)
+    setBills(billsInLocalStorage)
 
     if (!categoriesInLocalStorage) {
       setShouldShowAddCategory(true)
     }
+
+    if (!billsInLocalStorage) {
+      setShouldShowAddBill(true)
+    }
+
   }, [])
+
+  const showAddCategory = () => {
+    setShouldShowAddCategory(true)
+  }
+  const showAddBill = () => {
+    setShouldShowAddBill(true)
+  }
 
   const addCategory = (category) => {
     const updatedCategories = [...(categories || []), category]
@@ -34,8 +47,12 @@ function App() {
     localStorage.setItem(categories, JSON.stringify(updatedCategories))
   }
 
-  const showAddCategory = () => {
-    setShouldShowAddCategory(true)
+  const addBill = (amount, category, date) => {
+    const bill = {amount, category, date}
+    const updatedBills = [...(bills || []), bill]
+    setBills(updatedBills)
+    setShouldShowAddBill(false)
+    localStorage.setItem(bills, JSON.stringify(updatedBills))
   }
 
   return (
@@ -46,10 +63,20 @@ function App() {
             <div>
               <AddCategory onSubmit={addCategory} />
             </div>
+          ) : shouldShowAddBill ? (
+            <AddBill onSubmit={addBill} categories={categories} />
           ) : (
             <div>
               <NavBar categories={categories} showAddCategory={showAddCategory} />
-              <BillsTable />
+              <div className="container flex">
+                <div className="w-1/2">
+                  <BillsTable bills={bills} showAddBill={showAddBill} />
+                </div>
+                {/* 
+                <div className="w-1/2">
+                  <Chart />
+                </div> */}
+              </div>
             </div>
           )}
         </div>
