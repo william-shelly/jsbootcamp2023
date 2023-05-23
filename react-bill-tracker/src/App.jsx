@@ -31,7 +31,11 @@ function App() {
     const updatedCategories = [...(categories || []), category]
     setCategories(updatedCategories)
     setShouldShowAddCategory(false)
-    localStorage.Storage.setItem(categories, JSON.stringify(updatedCategories))
+    localStorage.setItem(categories, JSON.stringify(updatedCategories))
+  }
+
+  const showAddCategory = () => {
+    setShouldShowAddCategory(true)
   }
 
   return (
@@ -44,7 +48,7 @@ function App() {
             </div>
           ) : (
             <div>
-              <NavBar categories={categories} />
+              <NavBar categories={categories} showAddCategory={showAddCategory} />
               <BillsTable />
             </div>
           )}
