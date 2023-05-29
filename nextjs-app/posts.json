@@ -1,0 +1,10 @@
+{
+  "test": {
+    "title": "First Post",
+    "content": "Hey some post content"
+  },
+  "second": {
+    "title": "Second Post",
+    "content": "Hey this is the second post content"
+  }
+}
